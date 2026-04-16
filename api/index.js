@@ -13,7 +13,12 @@
 // 6. Listen on your predefined port and start the server.
 import express from 'express';
 import axios from 'axios';
+import path from "path";
+import { fileURLToPath } from "url";
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+app.set("views", path.join(__dirname, "../views"));
 const app = express();
 const PORT = 3000;
 
@@ -24,7 +29,7 @@ app.set('view engine', 'ejs');
 app.get('/', async (req, res) => {
     try{
         const response = await axios.get('https://secrets-api.appbrewery.com/random');
-        res.render('index.ejs',{secret:response.data.secret, user :response.data.username});
+        res.render('index',{secret:response.data.secret, user :response.data.username});
         console.log(response.data);
     }
     catch (error) {
@@ -36,6 +41,6 @@ app.get('/', async (req, res) => {
 
 
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+
+
+export default app;
