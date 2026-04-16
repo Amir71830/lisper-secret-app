@@ -20,7 +20,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 app.set("views", path.join(__dirname, "../views"));
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static('public'));
 
@@ -42,5 +42,4 @@ app.get('/', async (req, res) => {
 
 
 
-
-export default app;
+const PORT = process.env.PORT || 3000;
